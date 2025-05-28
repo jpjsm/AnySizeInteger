@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
-    public static AnySizeInteger operator &(AnySizeInteger a, AnySizeInteger b)
+    public static AnySizeInteger? operator &(AnySizeInteger a, AnySizeInteger b)
     {
-      if (((object)a == null) || ((object)b == null))
+      if ((a is null) || (b is null))
       {
         return null;
       }
@@ -18,9 +18,9 @@ namespace Katedra
       throw new NotImplementedException();
     }
 
-    public static AnySizeInteger operator |(AnySizeInteger a, AnySizeInteger b)
+    public static AnySizeInteger? operator |(AnySizeInteger a, AnySizeInteger b)
     {
-      if (((object)a == null) || ((object)b == null))
+      if ((a is null) || (b is null))
       {
         return null;
       }
@@ -28,9 +28,9 @@ namespace Katedra
       throw new NotImplementedException();
     }
 
-    public static AnySizeInteger operator ^(AnySizeInteger a, AnySizeInteger b)
+    public static AnySizeInteger? operator ^(AnySizeInteger a, AnySizeInteger b)
     {
-      if (((object)a == null) || ((object)b == null))
+      if ((a is null) || (b is null))
       {
         return null;
       }

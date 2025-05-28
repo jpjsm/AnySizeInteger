@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
     public static bool operator ==(AnySizeInteger a, AnySizeInteger b)
     {
-      if (((object)a == null) || ((object)b == null))
+      if ((a is null) || (b is null))
       {
         return false;
       }
@@ -45,14 +45,19 @@ namespace Katedra
 
     public static bool operator !=(AnySizeInteger a, AnySizeInteger b)
     {
-      if (((object)a == null) || ((object)b == null))
-      {
-        return true;
-      }
-
       if (System.Object.ReferenceEquals(a, b))
       {
         return false;
+      }
+
+      if ((a is null) && (b is null))
+      {
+        return false;
+      }
+
+      if ((a is null) || (b is null))
+      {
+        return true;
       }
 
       // if signs are different...
@@ -81,10 +86,21 @@ namespace Katedra
 
     public static bool operator <(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null)
+      {
+        throw new NullReferenceException(nameof(a));
+      }
+
+      if (b is null)
+      {
+        throw new NullReferenceException(nameof(b));
+      }
+
+      if (System.Object.ReferenceEquals(a, b))
       {
         return false;
       }
+
 
       if (a.negative && !b.negative)
       {
@@ -119,7 +135,17 @@ namespace Katedra
 
     public static bool operator >(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null)
+      {
+        throw new NullReferenceException(nameof(a));
+      }
+
+      if (b is null)
+      {
+        throw new NullReferenceException(nameof(b));
+      }
+
+      if (System.Object.ReferenceEquals(a, b))
       {
         return false;
       }
@@ -157,7 +183,17 @@ namespace Katedra
 
     public static bool operator <=(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null)
+      {
+        throw new NullReferenceException(nameof(a));
+      }
+
+      if (b is null)
+      {
+        throw new NullReferenceException(nameof(b));
+      }
+
+      if (System.Object.ReferenceEquals(a, b))
       {
         return false;
       }
@@ -195,7 +231,17 @@ namespace Katedra
 
     public static bool operator >=(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null)
+      {
+        throw new NullReferenceException(nameof(a));
+      }
+
+      if (b is null)
+      {
+        throw new NullReferenceException(nameof(b));
+      }
+
+      if (System.Object.ReferenceEquals(a, b))
       {
         return false;
       }

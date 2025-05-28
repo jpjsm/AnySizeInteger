@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Reflection;
+using AnySizeInt;
 
-namespace AnySizeIntegerUnitTestSuite
+namespace AnySizeInt.Tests
 {
-    using System.Reflection;
-    using Katedra;
-
-    [TestClass]
     public class TestAnySizeIntegerOperatorsBinary
     {
         #region Equality ==
-        [TestMethod]
+        [Fact]
         public void TestEqualityWithSameOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -20,7 +16,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(one == uno, "'EqualityWithSame' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestEqualityWithEquivalentOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -28,7 +24,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(one == uno, "'EqualityWithEquivalent' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestEqualityWithNull()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -36,7 +32,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(one == nil, "'EqualityWithNull' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestEqualityAllNull()
         {
             AnySizeInteger a = null;
@@ -44,7 +40,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(a == b, "'EqualityAllNull' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestEqualityWithEquivalent9876543210()
         {
 
@@ -63,7 +59,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(a == b, "'EqualityWithEquivalent9876543210' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestEqualityWithDifferent()
         {
 
@@ -92,7 +88,7 @@ namespace AnySizeIntegerUnitTestSuite
         #endregion
 
         #region Inequality !=
-        [TestMethod]
+        [Fact]
         public void TestInequalityWithSameOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -102,7 +98,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(one != uno, "'InequalityWithSame' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestInequalityWithEquivalentOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -110,7 +106,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(one != uno, "'InequalityWithEquivalent' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestInequalityWithNull()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -118,7 +114,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(one != nil, "'InequalityWithNull' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestInequalityAllNull()
         {
             AnySizeInteger a = null;
@@ -126,7 +122,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(a != b, "'InequalityAllNull' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestInequalityWithEquivalent9876543210()
         {
 
@@ -145,7 +141,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(a != b, "'InequalityWithEquivalent9876543210' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestInequalityWithDifferent()
         {
 
@@ -168,31 +164,31 @@ namespace AnySizeIntegerUnitTestSuite
         #endregion
 
         #region LessThan <
-        [TestMethod]
+        [Fact]
         public void TestLessThanBothPositive()
         {
             throw new NotImplementedException(nameof(TestLessThanBothPositive));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestLessThanBothNegative()
         {
             throw new NotImplementedException(nameof(TestLessThanBothNegative));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestLessThanComparedWithZero()
         {
             throw new NotImplementedException(nameof(TestLessThanComparedWithZero));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestLessThanPositiveNegative()
         {
             throw new NotImplementedException(nameof(TestLessThanPositiveNegative));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestLessThanWithSameOne()
         {
             throw new NotImplementedException(nameof(TestLessThanWithSameOne));
@@ -200,31 +196,31 @@ namespace AnySizeIntegerUnitTestSuite
         #endregion
 
         #region GreaterThan >
-        [TestMethod]
+        [Fact]
         public void TestGreaterThanBothPositive()
         {
             throw new NotImplementedException(nameof(TestGreaterThanBothPositive));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGreaterThanBothNegative()
         {
             throw new NotImplementedException(nameof(TestGreaterThanBothNegative));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGreaterThanComparedWithZero()
         {
             throw new NotImplementedException(nameof(TestGreaterThanComparedWithZero));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGreaterThanPositiveNegative()
         {
             throw new NotImplementedException(nameof(TestGreaterThanPositiveNegative));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGreaterThanWithSameOne()
         {
             throw new NotImplementedException(nameof(TestGreaterThanWithSameOne));

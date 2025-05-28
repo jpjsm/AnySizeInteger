@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Katedra
+﻿namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
@@ -19,6 +13,7 @@ namespace Katedra
 
     // To conform with .Net framework, objects need to provide a hash code value.
     // For efficiency, the hash code is precalculated for every AnySizeInteger
+    // AnySizeInteger are immutable objects; once created they never change value
     protected readonly int hashcode;
   }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
@@ -15,9 +15,9 @@ namespace Katedra
     /// <returns></returns>
     public static AnySizeInteger operator -(AnySizeInteger a)
     {
-      if (a == null)
+      if (a is null)
       {
-        return null;
+        return Zero;
       }
 
       return new AnySizeInteger(a.digits, !a.negative);
@@ -25,9 +25,9 @@ namespace Katedra
 
     public static AnySizeInteger operator ~(AnySizeInteger a)
     {
-      if (a == null)
+      if (a is null || a == Zero)
       {
-        return null;
+        return One;
       }
 
       ulong[] invertedigits = new ulong[a.digits.Length];

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {

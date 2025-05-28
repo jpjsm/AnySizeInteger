@@ -1,4 +1,12 @@
-# README #
+# *** WARNING ***
+
+- Library is in the process of being ported to a newer version of C#.
+
+- Unit tests are being migrated from old MS Test for desktop to xUnit.
+
+- ***None of the unit tests are working***
+
+# AnySizeInteger
 
 AnySizeInteger is a proof of concept library
 for doing integer math with no restriction
@@ -12,7 +20,7 @@ for prototyping.
 
 ## Status
 
-[![Build status](https://ci.appveyor.com/api/projects/status/f4fvwf4o8dahfcp0?svg=true)](https://ci.appveyor.com/project/JuanPabloJofre/anysizeinteger)
+[![Build status] ***N/A***]()
 
 ## What is this repository for? ###
 
@@ -28,18 +36,13 @@ Current version is 0.0.1.
 
 ## How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* TBD
 
 ## Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Writing tests: TBD
+* Code review: TBD
+* Other guidelines: TBD
 
 ## Who do I talk to? ###
 

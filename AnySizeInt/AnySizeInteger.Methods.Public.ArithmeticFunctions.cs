@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
     public partial class AnySizeInteger
     {
@@ -15,7 +15,7 @@ namespace Katedra
         /// <returns></returns>
         public static bool Odd(AnySizeInteger n)
         {
-            if (n == null) throw new ArgumentNullException();
+            ArgumentNullException.ThrowIfNull(n);
 
             return (1UL & n.digits[0]) == 1UL;
         }
@@ -27,7 +27,7 @@ namespace Katedra
         /// <returns></returns>
         public static bool Even(AnySizeInteger n)
         {
-            if (n == null) throw new ArgumentNullException();
+            ArgumentNullException.ThrowIfNull(n);
 
             return (1UL & n.digits[0]) == 0UL;
         }
@@ -42,19 +42,25 @@ namespace Katedra
             AnySizeInteger numerator,
             AnySizeInteger denominator)
         {
-            if (denominator == AnySizeInteger.Zero)
+            if ((denominator is null) || (denominator == AnySizeInteger.Zero))
             {
                 throw new DivideByZeroException();
             }
 
+            if ((numerator is null) || (numerator == Zero))
+            {
+                return new Tuple<AnySizeInteger, AnySizeInteger>(Zero, Zero);
+            }
+
+
             AnySizeInteger f, p;
             AnySizeInteger reminder = new AnySizeInteger(numerator);
-            AnySizeInteger quotient = Zero;
+            AnySizeInteger quotient = new(Zero);
 
             while (reminder >= denominator)
             {
-                f = denominator;
-                p = One;
+                f = new(denominator) ;
+                p = new(One);
                 while (reminder >= f)
                 {
                     f <<= 1;
@@ -183,8 +189,7 @@ namespace Katedra
 
             if (n < AnySizeInteger.Zero && Even(radical))
             {
-                Exception ex = null;
-                throw new ArgumentOutOfRangeException("Even roots cannot be calculated for negative numbers.", ex);
+                throw new ArgumentOutOfRangeException("Even roots cannot be calculated for negative numbers.", (Exception?)null);
             }
 
             if (n == AnySizeInteger.Zero || n == AnySizeInteger.One || n == AnySizeInteger.MinusOne)

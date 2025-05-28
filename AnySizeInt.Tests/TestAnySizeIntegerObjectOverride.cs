@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Reflection;
+using AnySizeInt;
 
-namespace AnySizeIntegerUnitTestSuite
+namespace AnySizeInt.Tests
 {
-    using System.Reflection;
-    using Katedra;
-
-    [TestClass]
     public class TestAnySizeIntegerObjectOverride
     {
         #region Equals
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideEqualsWithSame()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -18,7 +14,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(one.Equals(oneref), "'OverrideEqualsWithSame' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideEqualsWithSameValue()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -27,7 +23,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(uno.Equals(oneref), "'OverrideEqualsWithSameValue' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideEqualsWithNull()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -35,7 +31,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsFalse(one.Equals(oneref), "'OverrideEqualsWithNull' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideEqualsWithInt()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -45,7 +41,7 @@ namespace AnySizeIntegerUnitTestSuite
         #endregion
 
         #region GetHashCode
-        [TestMethod]
+        [Fact]
         public void TestGetHashCode()
         {
 
@@ -80,28 +76,28 @@ namespace AnySizeIntegerUnitTestSuite
         #endregion
 
         #region ToString
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringZero()
         {
             AnySizeInteger zero = new AnySizeInteger(0);
             Assert.IsTrue(zero.ToString() == "0", "'OverrideToStringZero' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
             Assert.IsTrue(one.ToString() == "1", "'OverrideToStringOne' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringMinusOne()
         {
             AnySizeInteger minusone = new AnySizeInteger(-1);
             Assert.IsTrue(minusone.ToString() == "- 1", "'OverrideToStringMinusOne' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringMaxUlong()
         {
             AnySizeInteger unintmaxvalue = new AnySizeInteger(UInt64.MaxValue);
@@ -109,7 +105,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(unintmaxvalue.ToString() == expected, "'OverrideToStringMaxUlong' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringMinusMaxUlong()
         {
             AnySizeInteger unintmaxvalue = -(new AnySizeInteger(UInt64.MaxValue));
@@ -117,7 +113,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(unintmaxvalue.ToString() == expected, "'OverrideToStringMaxUlong' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringLongNumber()
         {
             uint[] coefficients = new uint[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -130,7 +126,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(longnumber.Invoke("ToString",null).ToString() == expected, "'OverrideToStringLongNumber' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestObjectOverrideToStringMinusLongNumber()
         {
             uint[] coefficients = new uint[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };

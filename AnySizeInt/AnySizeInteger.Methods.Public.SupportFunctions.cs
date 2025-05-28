@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
@@ -51,6 +51,14 @@ namespace Katedra
       AnySizeInteger t = A;
       A = B;
       B = t;
+    }
+
+    public static string  ReverseString(string s)
+    {
+      char[] charArray = s.ToCharArray();
+      Array.Reverse(charArray);
+      
+      return new string(charArray);
     }
 
     private int len()

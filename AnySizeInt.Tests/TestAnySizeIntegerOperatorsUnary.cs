@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Reflection;
+using AnySizeInt;
 
-namespace AnySizeIntegerUnitTestSuite
+namespace AnySizeInt.Tests
 {
-    using System.Reflection;
-    using Katedra;
-
-    [TestClass]
     public class TestAnySizeIntegerOperatorsUnary
     {
         #region Unary negation
-        [TestMethod]
+        [Fact]
         public void TestUnaryNegationOne()
         {
             AnySizeInteger one = new AnySizeInteger(1);
@@ -18,7 +14,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(expected == -one, "'One' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnaryNegationMinusOne()
         {
             AnySizeInteger minusOne = new AnySizeInteger(-1);
@@ -26,7 +22,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(expected == -minusOne, "'Minus One' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnaryNegationZero()
         {
             AnySizeInteger zero = new AnySizeInteger(0);
@@ -34,7 +30,7 @@ namespace AnySizeIntegerUnitTestSuite
             Assert.IsTrue(expected == -zero, "'Zero' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnaryNegationAnyNumber()
         {
 

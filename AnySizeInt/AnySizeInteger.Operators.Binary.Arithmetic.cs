@@ -4,28 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
   public partial class AnySizeInteger
   {
     public static AnySizeInteger operator +(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null && b is null)
       {
-        return null;
+        return Zero;
+      }
+
+      if (a is null)
+      {
+        return b;
+      }
+
+      if (b is null)
+      {
+        return a;
       }
 
       if (a.IsPositive() ^ b.IsPositive())
-      {
-        if (a.IsPositive())
         {
-          return a - (-b);
+          if (a.IsPositive())
+          {
+            return a - (-b);
+          }
+          else
+          {
+            return b - (-a);
+          }
         }
-        else
-        {
-          return b - (-a);
-        }
-      }
 
       bool n = a.negative;
       int alen = a.len();
@@ -55,9 +65,19 @@ namespace Katedra
 
     public static AnySizeInteger operator -(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null && b is null)
       {
-        return null;
+        return Zero;
+      }
+
+      if (a is null)
+      {
+        return -b;
+      }
+
+      if (b is null)
+      {
+        return a;
       }
 
       if (a.IsPositive() ^ b.IsPositive())
@@ -122,9 +142,9 @@ namespace Katedra
 
     public static AnySizeInteger operator *(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if (a is null || b is null || a == Zero || b == Zero)
       {
-        return null;
+        return Zero;
       }
 
       bool sign = a.negative ^ b.negative;
@@ -171,14 +191,14 @@ namespace Katedra
 
     public static AnySizeInteger operator /(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if ((b is null) || (b == AnySizeInteger.Zero))
       {
-        return null;
+          throw new DivideByZeroException();
       }
 
-      if (b == Zero)
+      if ((a is null) || (a == Zero))
       {
-        throw new DivideByZeroException();
+          return  Zero;
       }
 
       return IntegerDivision(a, b).Item1;
@@ -186,14 +206,14 @@ namespace Katedra
 
     public static AnySizeInteger operator %(AnySizeInteger a, AnySizeInteger b)
     {
-      if (a == null || b == null)
+      if ((b is null) || (b == AnySizeInteger.Zero))
       {
-        return null;
+          throw new DivideByZeroException();
       }
 
-      if (b == Zero)
+      if ((a is null) || (a == Zero))
       {
-        throw new DivideByZeroException();
+          return  Zero;
       }
 
       return IntegerDivision(a, b).Item2;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Katedra
+namespace AnySizeInt
 {
     public partial class AnySizeInteger
     {
@@ -93,7 +93,7 @@ namespace Katedra
         /// <param name="n">The uint value converted to AnySizeInteger</param>
         public AnySizeInteger(uint n)
         {
-            digits = new ulong[1] { n };
+            digits = new ulong[] { n };
             negative = false;
             hashcode = Uint2Int(n);
         }
@@ -146,10 +146,10 @@ namespace Katedra
         /// The string must represent a valid signed integer number;
         /// optional sign character as first left character in string,
         /// with no space between the sign and the first digit on the left.
+        /// No decimal separators allowed.
         /// </remarks>
-        public AnySizeInteger(string s)
+        public AnySizeInteger(string? s)
         {
-            throw new NotImplementedException();
 
             if (String.IsNullOrWhiteSpace(s))
             {
@@ -164,10 +164,10 @@ namespace Katedra
             }
 
             int start = negative ? 1 : 0;
-            int len = ((s.Length - start) / 9) + 1;
-            digits = new ulong[len];
-            AnySizeInteger d = new AnySizeInteger();
 
+            AnySizeInteger result = new(0);
+
+            this.hashcode = 0;
             for (int i = start; i < s.Length; i++)
             {
                 if (s[i] < '0' || s[i] > '9')
@@ -175,24 +175,23 @@ namespace Katedra
                     throw new ArgumentException("Invalid character in number", nameof(s));
                 }
 
-                switch (s[i])
-                {
-                    default:
-                }
+                AnySizeInteger d = new((int)s[i]);
+                result = d + (result * 10);
             }
+
+            this.digits = new ulong[result.digits.Length];
+            Array.Copy(result.digits, this.digits, result.digits.Length);
+            this.hashcode = result.hashcode;
         }
 
         /// <summary>
         /// AnySizeInteger constructor for AnySizeInteger data type
         /// </summary>
         /// <param name="n">The AnySizeInteger value</param>
-        public AnySizeInteger(AnySizeInteger n)
+        public AnySizeInteger(AnySizeInteger? n)
         {
-            if (n == null)
-            {
-                throw new ArgumentNullException(nameof(n));
-            }
-
+            ArgumentNullException.ThrowIfNull(n);
+            digits = new ulong[n.len()];
             n.digits.CopyTo(digits, 0);
             negative = n.negative;
             hashcode = n.hashcode;
@@ -205,10 +204,7 @@ namespace Katedra
         /// <param name="n">Is negative number.</param>
         private AnySizeInteger(uint[] d, bool n)
         {
-            if (d == null)
-            {
-                throw new ArgumentNullException(nameof(d));
-            }
+            ArgumentNullException.ThrowIfNull(d);
 
             // remove zeroes to the left
             int upperLimit;
@@ -275,7 +271,7 @@ namespace Katedra
 
         //// ToDo: Implement byte array conversion
 
-        //public AnySizeInteger(byte[] arr)
+        //public AnySizeInteger(byte[] arr, bool negative=false)
         //{
         //    if (arr == null)
         //    {

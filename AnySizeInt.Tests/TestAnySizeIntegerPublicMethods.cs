@@ -1,40 +1,36 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Reflection;
+using AnySizeInt;
 
-namespace AnySizeIntegerUnitTestSuite
+namespace AnySizeInt.Tests
 {
-    using System.Reflection;
-    using Katedra;
-
-    [TestClass]
     public class TestAnySizeIntegerPublicMethods
     {
         #region Uint2Int
-        [TestMethod]
+        [Fact]
         public void TestUint2IntZero()
         {
             Assert.IsTrue(AnySizeInteger.Uint2Int(0U) == 0, "'Zero' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUint2IntOne()
         {
             Assert.IsTrue(AnySizeInteger.Uint2Int(1U) == 1, "'One' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUint2IntMaxValue()
         {
             Assert.IsTrue(AnySizeInteger.Uint2Int(uint.MaxValue) == -1, "'MaxValue' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUint2IntHighestBitOn()
         {
             Assert.IsTrue(AnySizeInteger.Uint2Int(0x80000000U) == int.MinValue, "'HighestBitOn' test failed");
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUint2IntNegativeValues()
         {
             const uint highestBitOn = 0x80000000U;
