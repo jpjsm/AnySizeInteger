@@ -13,9 +13,9 @@ namespace AnySizeInt
         /// </summary>
         public AnySizeInteger()
         {
-            digits = new ulong[] { 0 };
+            digits = [0];
             negative = false;
-            hashcode = Uint2Int((uint)digits[0]);
+            hashcode = GetHashcode(digits);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace AnySizeInt
 
             digits = new ulong[] { (uint)tmp };
 
-            hashcode = n;
+            hashcode = GetHashcode(digits);
         }
 
         /// <summary>
@@ -60,6 +60,7 @@ namespace AnySizeInt
             {
                 digits = new ulong[] { 0, 0, 1 };
                 negative = true;
+                hashcode = GetHashcode(digits);
                 return;
             }
 
@@ -84,6 +85,8 @@ namespace AnySizeInt
             {
                 digits[1] = (uint)(tmp >> 32);
             }
+
+            hashcode = GetHashcode(digits);
         }
 
 
@@ -95,7 +98,7 @@ namespace AnySizeInt
         {
             digits = new ulong[] { n };
             negative = false;
-            hashcode = Uint2Int(n);
+            hashcode = GetHashcode(digits);
         }
 
         /// <summary>
@@ -127,7 +130,6 @@ namespace AnySizeInt
                 digits = new ulong[2];
                 digits[0] = (uint)n;
                 digits[1] = (uint)(n >> 32);
-                hashcode = Uint2Int((uint)(digits[0] ^ digits[1]));
             }
             else
             {
@@ -136,6 +138,7 @@ namespace AnySizeInt
             }
 
             negative = false;
+            hashcode = GetHashcode(digits);
         }
 
         /// <summary>
@@ -147,6 +150,8 @@ namespace AnySizeInt
         /// optional sign character as first left character in string,
         /// with no space between the sign and the first digit on the left.
         /// No decimal separators allowed.
+        /// Empty or null strings throw exception 'ArgumentNullException'
+        /// White spaces are trimmed off the string on both ends before the conversion.
         /// </remarks>
         public AnySizeInteger(string? s)
         {
@@ -166,8 +171,7 @@ namespace AnySizeInt
             int start = negative ? 1 : 0;
 
             AnySizeInteger result = new(0);
-
-            this.hashcode = 0;
+            
             for (int i = start; i < s.Length; i++)
             {
                 if (s[i] < '0' || s[i] > '9')
@@ -190,11 +194,19 @@ namespace AnySizeInt
         /// <param name="n">The AnySizeInteger value</param>
         public AnySizeInteger(AnySizeInteger? n)
         {
-            ArgumentNullException.ThrowIfNull(n);
-            digits = new ulong[n.len()];
-            n.digits.CopyTo(digits, 0);
-            negative = n.negative;
-            hashcode = n.hashcode;
+            if (n is null)
+            {
+                digits = [0];
+                negative = false;
+                hashcode = GetHashcode(digits);
+            }
+            else
+            {
+                digits = new ulong[n.len()];
+                n.digits.CopyTo(digits, 0);
+                negative = n.negative;
+                hashcode = n.hashcode;
+            }
         }
 
         /// <summary>
@@ -225,11 +237,7 @@ namespace AnySizeInt
             }
 
             negative = n;
-            hashcode = 0;
-            for (int i = 0; i < digits.Length; i++)
-            {
-                hashcode ^= Uint2Int((uint)digits[i]);
-            }
+            hashcode = GetHashcode(digits);
         }
 
         /// <summary>
@@ -239,10 +247,7 @@ namespace AnySizeInt
         /// <param name="n">Is negative number.</param>
         private AnySizeInteger(ulong[] d, bool n)
         {
-            if (d == null)
-            {
-                throw new ArgumentNullException(nameof(d));
-            }
+            ArgumentNullException.ThrowIfNull(d);
 
             // remove zeroes to the left
             int upperLimit;
@@ -262,11 +267,7 @@ namespace AnySizeInt
             }
 
             negative = n;
-            hashcode = 0;
-            for (int i = 0; i < digits.Length; i++)
-            {
-                hashcode ^= Uint2Int((uint)digits[i]);
-            }
+            hashcode = GetHashcode(digits);
         }
 
         //// ToDo: Implement byte array conversion

@@ -20,5 +20,21 @@ namespace AnySizeInt
 
       return h;
     }
+
+    private static int GetHashcode(ulong[] digits)
+    {
+      if ((digits is null) || (digits.Length == 0))
+      {
+        throw new NullReferenceException(nameof(digits));
+      }
+
+      int result = ((int)digits[0]) ^ (int)(digits[0] >> 32);
+      for (int i = 1; i < digits.Length; i++)
+      {
+        result ^= (((int)digits[i]) ^ (int)(digits[i] >> 32));
+      }
+
+      return result;
+    }
   }
 }

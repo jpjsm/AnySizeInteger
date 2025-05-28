@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using AnySizeInt;
 
 namespace AnySizeInt.Tests
 {
@@ -9,17 +8,16 @@ namespace AnySizeInt.Tests
         [Fact]
         public void TestDefaultConstructor()
         {
-            AnySizeInteger foo = new AnySizeInteger();
-            Assert.True(foo.IsPositive(), "Default constructor returns negative for zero");
-            Assert.True(foo.Len() == 1, "Default constructor Len different than 1");
+            AnySizeInteger observed = new();
+            //Assert.True(observed.IsPositive(), "Default constructor returns negative for zero");
+            //Assert.True(observed.Len() == 1, $"Default constructor Len different than 1; received length is {observed.Len()}");
+            //Assert.True(observed.ToString() == "0", "Default constructor value different than zero; received value is {observed.ToString()}");
 
-            Type anysizeintegerType = typeof(AnySizeInteger);
-            FieldInfo digitsInfo = anysizeintegerType.GetField("digits", BindingFlags.NonPublic | BindingFlags.Instance);
-            ulong[] digitsValue = (ulong[])digitsInfo.GetValue(foo);
-
-            Assert.NotNull(digitsValue, "Reflection couldn't get digits");
-            Assert.True(digitsValue.Length == 1, "Digits size different than 1");
-            Assert.True(digitsValue[0] == 0, "Default constructor returns different than zero");
+            var (digits, negative, hashcode) = observed.GetInners();
+            Assert.True(digits.Length == 1, $"Default constructor Len different than 1; received length is {digits.Length}");
+            Assert.True(digits[0] == 0UL, $"Default constructor value different than zero; received value is {digits[0]}");
+            Assert.False(negative, $"Default constructor returns negative for zero");
+            Assert.True(hashcode == 0, $"Default constructor hashcode value different than zero; received value is {hashcode}");
         }
         #endregion
 
@@ -27,33 +25,23 @@ namespace AnySizeInt.Tests
         [Fact]
         public void TestIntConstructorZero()
         {
-            AnySizeInteger zero = new AnySizeInteger(0);
-            Assert.True(zero.IsPositive(), "Int constructor returns negative for zero");
-            Assert.True(zero.Len() == 1, "Int constructor Len different than 1");
-
-            Type anysizeintegerType = typeof(AnySizeInteger);
-            FieldInfo digitsInfo = anysizeintegerType.GetField("digits", BindingFlags.NonPublic | BindingFlags.Instance);
-            ulong[] digitsValue = (ulong[])digitsInfo.GetValue(zero);
-
-            Assert.NotNull(digitsValue, "Reflection couldn't get digits");
-            Assert.True(digitsValue.Length == 1, "Digits size different than 1");
-            Assert.True(digitsValue[0] == 0, "Int constructor returns different than zero");
+            AnySizeInteger observed = new AnySizeInteger(0);
+            var (digits, negative, hashcode) = observed.GetInners();
+            Assert.True(digits.Length == 1, $"Default constructor Len different than 1; received length is {digits.Length}");
+            Assert.True(digits[0] == 0UL, $"Default constructor value different than zero; received value is {digits[0]}");
+            Assert.False(negative, $"Default constructor returns negative for zero");
+            Assert.True(hashcode == 0, $"Default constructor hashcode value different than zero; received value is {hashcode}");
         }
 
         [Fact]
         public void TestIntConstructorOne()
         {
-            AnySizeInteger one = new AnySizeInteger(1);
-            Assert.True(one.IsPositive(), "Int constructor returns negative for positive one");
-            Assert.True(one.Len() == 1, "Int constructor Len different than 1");
-
-            Type anysizeintegerType = typeof(AnySizeInteger);
-            FieldInfo digitsInfo = anysizeintegerType.GetField("digits", BindingFlags.NonPublic | BindingFlags.Instance);
-            ulong[] digitsValue = (ulong[])digitsInfo.GetValue(one);
-
-            Assert.NotNull(digitsValue, "Reflection couldn't get digits");
-            Assert.True(digitsValue.Length == 1, "Digits size different than 1");
-            Assert.True(digitsValue[0] == 1, "Int constructor returns different than positive one");
+            AnySizeInteger observed = new AnySizeInteger(1);
+            var (digits, negative, hashcode) = observed.GetInners();
+            Assert.True(digits.Length == 1, $"Default constructor Len different than 1; received length is {digits.Length}");
+            Assert.True(digits[0] == 1UL, $"Default constructor value different than one; received value is {digits[0]}");
+            Assert.False(negative, $"Default constructor returns negative for zero");
+            Assert.True(hashcode == 1, $"Default constructor hashcode value different than zero; received value is {hashcode}");
         }
 
         [Fact]
