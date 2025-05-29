@@ -158,10 +158,18 @@ namespace AnySizeInt
 
             if (String.IsNullOrWhiteSpace(s))
             {
-                throw new ArgumentNullException(nameof(s));
+                digits = [0];
+                negative = false;
+                hashcode = GetHashcode(digits);
+                return;
             }
 
             s = s.Trim();
+            if (s[0] == '-' && s.Length == 1)
+            {
+                throw new ArgumentException("Invalid character in number", nameof(s));
+            }
+
             negative = false;
             if (s[0] == '-')
             {
@@ -171,7 +179,7 @@ namespace AnySizeInt
             int start = negative ? 1 : 0;
 
             AnySizeInteger result = new(0);
-            
+
             for (int i = start; i < s.Length; i++)
             {
                 if (s[i] < '0' || s[i] > '9')
@@ -179,13 +187,17 @@ namespace AnySizeInt
                     throw new ArgumentException("Invalid character in number", nameof(s));
                 }
 
-                AnySizeInteger d = new((int)s[i]);
+                AnySizeInteger d = new((int)(s[i] - '0'));
                 result = d + (result * 10);
             }
 
             this.digits = new ulong[result.digits.Length];
             Array.Copy(result.digits, this.digits, result.digits.Length);
             this.hashcode = result.hashcode;
+            if (digits.Length == 1 && digits[0] == 0UL)
+            {
+                negative = false;
+            }
         }
 
         /// <summary>
@@ -214,11 +226,15 @@ namespace AnySizeInt
         /// </summary>
         /// <param name="d">The array of uint digits, representing a polynomial expression.</param>
         /// <param name="n">Is negative number.</param>
+        /// <remarks>
+        /// Array is stored in something similar to Little Endian order.
+        /// 
+        /// </remarks>
         private AnySizeInteger(uint[] d, bool n)
         {
             ArgumentNullException.ThrowIfNull(d);
 
-            // remove zeroes to the left
+            // right trim zeroes
             int upperLimit;
             for (upperLimit = d.Length - 1;
                 upperLimit > 0 && d[upperLimit] == 0;
@@ -232,7 +248,7 @@ namespace AnySizeInt
             if (digits.Length == 1 && digits[0] == 0)
             {
                 negative = false;
-                hashcode = 0;
+                hashcode = GetHashcode(digits);
                 return;
             }
 
