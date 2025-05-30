@@ -64,27 +64,15 @@ namespace AnySizeInt
                 return;
             }
 
-            if (n <= int.MaxValue && n >= int.MinValue)
-            {
-                digits = new ulong[1];
-            }
-            else
-            {
-                digits = new ulong[2];
-            }
-
-            long tmp = n;
             negative = n < 0;
             if (negative)
             {
-                tmp *= -1;
+                n = -n;
             }
 
-            digits[0] = (uint)tmp;
-            if (digits.Length == 2)
-            {
-                digits[1] = (uint)(tmp >> 32);
-            }
+            ulong d0 = (ulong)n & all32ones;
+            ulong d1 = ((ulong)n) >> 32;
+            digits = d1 > 0 ? [d0, d1] : [d0];
 
             hashcode = GetHashcode(digits);
         }
