@@ -6,52 +6,52 @@ using System.Threading.Tasks;
 
 namespace AnySizeInt
 {
-  public partial class AnySizeInteger
-  {
-    public override bool Equals(object? obj)
+    public partial class AnySizeInteger
     {
-      if (obj is null)
-      {
-        return false;
-      }
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
 
-      AnySizeInteger? other = obj as AnySizeInteger;
+            AnySizeInteger? other = obj as AnySizeInteger;
 
-      if (other is null)
-      {
-        return false;
-      }
+            if (other is null)
+            {
+                return false;
+            }
 
-      return this == other;
+            return this == other;
+        }
+
+        public override int GetHashCode()
+        {
+            return hashcode;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new();
+
+            if (this.negative)
+            {
+                result.Append('-');
+            }
+
+            AnySizeInteger t = new(this.digits, false);
+
+            AnySizeInteger q, r;
+            while (t >= 10)
+            {
+                (q, r) = IntegerDivision(t, 10);
+                t = q;
+                result.Append(r.digits[0]);
+            }
+
+            result.Append(t.digits[0]);
+
+            return ReverseString(result.ToString());
+        }
     }
-
-    public override int GetHashCode()
-    {
-      return hashcode;
-    }
-
-    public override string ToString()
-    {
-      StringBuilder result = new();
-
-      if (this.negative)
-      {
-        result.Append('-');
-      }
-
-      AnySizeInteger t = new(this.digits, false);
-
-      AnySizeInteger q, r;
-      while (t >= 10)
-      {
-        (q, r) = IntegerDivision(t, 10);
-        t = q;
-        result.Append(r.digits[0]);
-      }
-
-      result.Append(t.digits[0]);
-      
-      return ReverseString(result.ToString());
-    }
-  }
 }

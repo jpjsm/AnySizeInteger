@@ -4,48 +4,22 @@
     {
         #region String Constructor
         [Fact]
-        public void TestStringConstructorNull()
+        public void TestAnySizeIntegerConstructorNull()
         {
-            string? argument = null;
+            AnySizeInteger? argument = null;
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
-            Assert.True(digits.Length == 1, $"Null string constructor Len different than 1; received length is {digits.Length}");
-            Assert.True(digits[0] == 0UL, $"Null string constructor value different than zero; received value is {digits[0]}");
-            Assert.False(negative, $"Null string constructor returns negative for zero");
-            Assert.True(hashcode == 0, $"Null string constructor hashcode value different than zero; received value is {hashcode}");
+            Assert.True(digits.Length == 1, $"Null AnySizeInteger constructor Len different than 1; received length is {digits.Length}");
+            Assert.True(digits[0] == 0UL, $"Null AnySizeInteger constructor value different than zero; received value is {digits[0]}");
+            Assert.False(negative, $"Null AnySizeInteger constructor returns negative for zero");
+            Assert.True(hashcode == 0, $"Null AnySizeInteger constructor hashcode value different than zero; received value is {hashcode}");
         }
 
         [Fact]
-        public void TestStringConstructorEmpty()
+        public void TestAnySizeIntegerConstructorZero()
         {
-            string? argument = "";
-            AnySizeInteger observed = new(argument);
-
-            var (digits, negative, hashcode) = observed.GetInners();
-            Assert.True(digits.Length == 1, $"Empty string constructor Len different than 1; received length is {digits.Length}");
-            Assert.True(digits[0] == 0UL, $"Empty string constructor value different than zero; received value is {digits[0]}");
-            Assert.False(negative, $"Empty string constructor returns negative for zero");
-            Assert.True(hashcode == 0, $"Empty string constructor hashcode value different than zero; received value is {hashcode}");
-        }
-
-        [Fact]
-        public void TestStringConstructorWhiteSpaces()
-        {
-            string? argument = "\t  \t";
-            AnySizeInteger observed = new(argument);
-
-            var (digits, negative, hashcode) = observed.GetInners();
-            Assert.True(digits.Length == 1, $"WhiteSpaces string constructor Len different than 1; received length is {digits.Length}");
-            Assert.True(digits[0] == 0UL, $"WhiteSpaces string constructor value different than zero; received value is {digits[0]}");
-            Assert.False(negative, $"WhiteSpaces string constructor returns negative for zero");
-            Assert.True(hashcode == 0, $"WhiteSpaces string constructor hashcode value different than zero; received value is {hashcode}");
-        }
-
-        [Fact]
-        public void TestStringConstructorZero()
-        {
-            string? argument = "0";
+            AnySizeInteger? argument = AnySizeInteger.Zero;
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
@@ -56,22 +30,9 @@
         }
 
         [Fact]
-        public void TestStringConstructorMinusZero()
+        public void TestAnySizeIntegerConstructorOne()
         {
-            string? argument = "-0";
-            AnySizeInteger observed = new(argument);
-
-            var (digits, negative, hashcode) = observed.GetInners();
-            Assert.True(digits.Length == 1, $"MinusZero string constructor Len different than 1; received length is {digits.Length}");
-            Assert.True(digits[0] == 0UL, $"MinusZero string constructor value different than zero; received value is {digits[0]}");
-            Assert.False(negative, $"MinusZero string constructor returns negative for zero");
-            Assert.True(hashcode == 0, $"MinusZero string constructor hashcode value different than zero; received value is {hashcode}");
-        }
-
-        [Fact]
-        public void TestStringConstructorOne()
-        {
-            string? argument = "1";
+            AnySizeInteger? argument = AnySizeInteger.One;
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
@@ -82,9 +43,9 @@
         }
 
         [Fact]
-        public void TestStringConstructorMinusOne()
+        public void TestAnySizeIntegerConstructorMinusOne()
         {
-            string? argument = "-1";
+            AnySizeInteger? argument = AnySizeInteger.MinusOne;
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
@@ -95,9 +56,9 @@
         }
 
         [Fact]
-        public void TestStringConstructor1111AnySizeIntegerDigits()
+        public void TestAnySizeIntegerConstructor1111AnySizeIntegerDigits()
         {
-            string? argument = "79228162532711081671548469249";
+            AnySizeInteger? argument = new AnySizeInteger("79228162532711081671548469249");
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
@@ -108,9 +69,9 @@
         }
 
         [Fact]
-        public void TestStringConstructor9876543210AnySizeIntegerDigits()
+        public void TestAnySizeIntegerConstructor9876543210AnySizeIntegerDigits()
         {
-            string? argument = "4475909128614416493485689423417672529955905318382457129602946176313508885239553977221120";
+            AnySizeInteger? argument = new AnySizeInteger("4475909128614416493485689423417672529955905318382457129602946176313508885239553977221120");
             AnySizeInteger observed = new(argument);
 
             var (digits, negative, hashcode) = observed.GetInners();
@@ -132,7 +93,7 @@
         }
 
         [Fact]
-        public void TestStringConstructorRandomValues()
+        public void TestAnySizeIntegerConstructorRandomValues()
         {
             string[] randoms = [
                 "-3855297896",
@@ -148,7 +109,8 @@
                 ulong expectedDigits0 = expectedNegative ? (ulong)(-((long)rnd)) : (ulong)rnd;
                 int expectedHashcode = (int)expectedDigits0;
 
-                AnySizeInteger observed = new AnySizeInteger(rnd_str);
+                AnySizeInteger? argument = new AnySizeInteger(rnd_str);
+                AnySizeInteger observed = new AnySizeInteger(argument);
                 var (digits, negative, hashcode) = observed.GetInners();
                 Assert.True(digits.Length == 1, $"'{rnd_str}' Constructor Len different than 1; received length is {digits.Length}");
                 Assert.True(digits[0] == expectedDigits0, $"'{rnd_str}' Constructor value different than expected {expectedDigits0}; received value is {digits[0]}; rnd value {rnd}");

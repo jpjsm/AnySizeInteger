@@ -18,7 +18,7 @@ namespace AnySizeInt
         /// </remarks>
         public ulong ToUlong()
         {
-            if (digits.Length == 1)
+            if (digits.Length == 0)
             {
                 return digits[0];
             }

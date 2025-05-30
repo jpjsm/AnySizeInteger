@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +59,7 @@ namespace AnySizeInt
 
             while (reminder >= denominator)
             {
-                f = new(denominator) ;
+                f = new(denominator);
                 p = new(One);
                 while (reminder >= f)
                 {
@@ -133,7 +133,7 @@ namespace AnySizeInt
         /// <returns></returns>
         public static AnySizeInteger Modular_Power(AnySizeInteger b, AnySizeInteger e, AnySizeInteger m)
         {
-            
+
             if (e < 0) return Zero;
 
             if (b == Zero) return Zero;

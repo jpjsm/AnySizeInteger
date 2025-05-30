@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -198,6 +198,45 @@ namespace AnySizeInt
             {
                 negative = false;
             }
+        }
+
+        /// <summary>
+        /// AnySizeInteger constructor for float data type
+        /// </summary>
+        /// <param name="f">The float value</param>
+        /// <remarks>
+        /// The argument is converted to it's full decimal representation;
+        /// all integer digits are fully written and then converted to AnySizeInteger type
+        /// </remarks>
+        public AnySizeInteger(float f)
+            : this(ToStringInteger(f))
+        {
+        }
+
+        /// <summary>
+        /// AnySizeInteger constructor for double data type
+        /// </summary>
+        /// <param name="f">The double value</param>
+        /// <remarks>
+        /// The argument is converted to it's full decimal representation;
+        /// all integer digits are fully written and then converted to AnySizeInteger type
+        /// </remarks>
+        public AnySizeInteger(double d)
+            : this(ToStringInteger(d))
+        {
+        }
+
+        /// <summary>
+        /// AnySizeInteger constructor for decimal data type
+        /// </summary>
+        /// <param name="f">The decimal value</param>
+        /// <remarks>
+        /// The argument is converted to it's full decimal representation;
+        /// all integer digits are fully written and then converted to AnySizeInteger type
+        /// </remarks>
+        public AnySizeInteger(decimal d)
+            : this(ToStringInteger(d))
+        {
         }
 
         /// <summary>
