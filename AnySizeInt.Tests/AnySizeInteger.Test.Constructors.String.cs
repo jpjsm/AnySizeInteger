@@ -1,4 +1,4 @@
-﻿namespace AnySizeInt.Tests
+namespace AnySizeInt.Tests
 {
     public partial class AnySizeIntegerConstructors
     {

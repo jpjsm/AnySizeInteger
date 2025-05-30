@@ -1,4 +1,4 @@
-﻿namespace AnySizeInt
+namespace AnySizeInt
 {
     public partial class AnySizeInteger
     {
