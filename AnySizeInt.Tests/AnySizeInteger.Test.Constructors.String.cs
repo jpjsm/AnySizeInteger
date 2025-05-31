@@ -128,7 +128,7 @@ namespace AnySizeInt.Tests
                  (digits[9] == 9UL)),
                 $"9876543210AnySizeIntegerDigits string constructor value different than zero; received value is {digits[0]}");
             Assert.False(negative, $"9876543210AnySizeIntegerDigits string constructor returns negative for 1111AnySizeIntegerDigits");
-            Assert.True(hashcode == 1, $"1111AnySizeIntegerDigits string constructor hashcode value different than one; received value is {hashcode}");
+            Assert.True(hashcode == 1, $"9876543210AnySizeIntegerDigits string constructor hashcode value different than one; received value is {hashcode}");
         }
 
         [Fact]

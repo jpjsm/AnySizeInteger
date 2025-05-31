@@ -4,19 +4,21 @@
 
 - Unit tests are being migrated from old MS Test for desktop to xUnit.
 
-- ***None of the unit tests are working***
+- ***Some of the unit tests are working***
 
 # AnySizeInteger
 
-AnySizeInteger is a proof of concept library
-for doing integer math with no restriction
-on the size of the integer.
+AnySizeInteger is a proof of concept library for doing integer math with no
+restriction on the size of the integer.
 
-It's written in C#, since is the language I'm
-most confortable with.
-Also, since this is a proof of concept of
-the algorithms, C# seems to be well suited
-for prototyping. 
+It's written in C#, since is the language I'm most confortable with.
+
+Also, since this is a proof of concept of the algorithms, C# seems to be well
+suited for prototyping.
+
+## Documentation
+
+- [Architecture](docs/Architecture.md)
 
 ## Status
 
@@ -26,9 +28,8 @@ for prototyping.
 
 ### Quick summary
 
-AnySizeInteger is defined as a class to do 
-arithmetic on integers; 
-with no restriction on the size of the integer. 
+AnySizeInteger is defined as a class to do arithmetic on integers; with no
+restriction on the size of the integer.
 
 ### Version
 
