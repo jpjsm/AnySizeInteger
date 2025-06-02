@@ -158,13 +158,18 @@ namespace AnySizeInt
                 throw new ArgumentException("Invalid character in number", nameof(s));
             }
 
+            int start = 0;
             negative = false;
             if (s[0] == '-')
             {
                 negative = true;
+                start = 1;
             }
 
-            int start = negative ? 1 : 0;
+            if (s[0] == '+')
+            {
+                start = 1;
+            }
 
             AnySizeInteger result = new(0);
 
@@ -257,7 +262,7 @@ namespace AnySizeInt
         /// Array is stored in something similar to Little Endian order.
         /// 
         /// </remarks>
-        private AnySizeInteger(uint[] d, bool n)
+        public AnySizeInteger(uint[] d, bool n)
         {
             ArgumentNullException.ThrowIfNull(d);
 
@@ -288,7 +293,7 @@ namespace AnySizeInt
         /// </summary>
         /// <param name="d">The array of ulong digits, representing a polynomial expression.</param>
         /// <param name="n">Is negative number.</param>
-        private AnySizeInteger(ulong[] d, bool n)
+        public AnySizeInteger(ulong[] d, bool n)
         {
             ArgumentNullException.ThrowIfNull(d);
 
@@ -313,16 +318,19 @@ namespace AnySizeInt
             hashcode = GetHashcode(digits);
         }
 
-        //// ToDo: Implement byte array conversion
+        /// <summary>
+        /// AnySizeInteger constructor for binary representation.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="n">Is negative number.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public AnySizeInteger(byte[] bytes, bool n)
+        {
+            ArgumentNullException.ThrowIfNull(bytes);
 
-        //public AnySizeInteger(byte[] arr, bool negative=false)
-        //{
-        //    if (arr == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(arr));
-        //    }
-
-        //    arr.CopyTo(digits, 0);
-        //}
+            digits = AnySizeIntegerDigitsFromBytes(bytes);
+            negative = n;
+            hashcode = GetHashcode(digits);
+        }
     }
 }

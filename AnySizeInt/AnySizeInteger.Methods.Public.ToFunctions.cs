@@ -9,21 +9,39 @@ namespace AnySizeInt
     public partial class AnySizeInteger
     {
         /// <summary>
-        /// Returns the AnySizeInteger as a ULong structure
+        /// 
         /// </summary>
-        /// <returns>The length of the number in 32 bits units</returns>
-        /// <remarks>
-        /// Returned value will be truncated.
-        /// Returned value is a positive number regardless of AnySizeInteger sign.
-        /// </remarks>
-        public ulong ToUlong()
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public byte[] AnySizeIntegerDigitsToBytes()
         {
-            if (digits.Length == 0)
+            byte[] result = new byte[digits.Length * sizeof(uint)];
+
+            for (int i = 0; i < digits.Length; i++)
             {
-                return digits[0];
+                byte[] digitBytes = BitConverter.GetBytes((uint)digits[i]);
+                Array.Copy(digitBytes, 0, result, i * sizeof(uint), digitBytes.Length);
             }
-            return (digits[1] << 32) | (digits[0]);
+
+            return result;
         }
 
+        public static ulong[] AnySizeIntegerDigitsFromBytes(byte[] bytes)
+        {
+            int digitsLen = bytes.Length / sizeof(uint);
+            if (digitsLen * sizeof(uint) != bytes.Length)
+            {
+                throw new ArgumentException($"{nameof(bytes)} length is not a multiple of sizeof(uint).");
+            }
+
+            ulong[] digits = new ulong[digitsLen];
+            for (int i = 0; i < digitsLen; i++)
+            {
+                uint digit = BitConverter.ToUInt32(bytes, i * sizeof(uint));
+                digits[i] = digit;
+            }
+
+            return digits;
+        }
     }
 }

@@ -15,6 +15,11 @@ namespace AnySizeInt
                 return false;
             }
 
+            if (Object.ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
             AnySizeInteger? other = obj as AnySizeInteger;
 
             if (other is null)
